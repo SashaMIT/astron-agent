@@ -175,7 +175,9 @@ async def test_url_processing_forwards_transport_selector(
     monkeypatch: pytest.MonkeyPatch, mcp_server: Any
 ) -> None:
     connect = AsyncMock(return_value=Mock(server_status=ErrCode.SUCCESSES.code))
-    monkeypatch.setattr(mcp_server, "_reject_unsafe_mcp_url", AsyncMock(return_value=None))
+    monkeypatch.setattr(
+        mcp_server, "_reject_unsafe_mcp_url", AsyncMock(return_value=None)
+    )
     monkeypatch.setattr(mcp_server, "_connect_and_get_tools", connect)
 
     await mcp_server._process_mcp_server_by_url(

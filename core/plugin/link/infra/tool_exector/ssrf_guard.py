@@ -210,7 +210,9 @@ def validate_resolved_destination(
         return parsed
 
     try:
-        results = socket.getaddrinfo(hostname, parsed.port or 0, type=socket.SOCK_STREAM)
+        results = socket.getaddrinfo(
+            hostname, parsed.port or 0, type=socket.SOCK_STREAM
+        )
     except socket.gaierror as exc:
         raise OutboundPolicyError("Outbound hostname could not be resolved") from exc
     return _check_resolved_addresses(parsed, policy, results)
